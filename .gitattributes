@@ -1,0 +1,5 @@
+# Copias exactas de los módulos fiscales del POS: git no debe tocar sus saltos de línea
+# (su huella SHA-256 se comprueba en test/timbrar-guarda.test.ts).
+src/timbrar/cfdi.ts -text
+src/timbrar/facturacom-cuerpo.ts -text
+src/timbrar/facturacom-mensajes.ts -text
