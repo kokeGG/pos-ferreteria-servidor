@@ -38,6 +38,9 @@ export const TABLAS: Readonly<Record<string, Tabla>> = {
   venta_pagos: { llave: "id", escribible: true },
   cotizaciones: { llave: "id", escribible: true },
   cotizacion_detalles: { llave: "id", escribible: true },
+  // Cobranza: cuentas por cobrar (ventas a crédito) y sus abonos. Las reglas de saldo viven en la app.
+  cuentas_por_cobrar: { llave: "id", escribible: true },
+  abonos: { llave: "id", escribible: true },
   // Los movimientos suben solo por `aplicar_movimientos_inventario`: un upsert
   // directo se saltaría el cálculo de la existencia global.
   movimientos_inventario: { llave: "id", escribible: false },

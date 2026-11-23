@@ -15,6 +15,8 @@
     "start": "tsx --env-file=.env src/servidor.ts",
     "terminal:crear": "tsx --env-file=.env src/crear-terminal.ts",
     "humo": "tsx --env-file=.env src/humo.ts",
+    "supabase:aplicar": "tsx --env-file=.env src/supabase-aplicar.ts",
+    "supabase:terminal": "tsx --env-file=.env src/supabase-terminal.ts",
     "humo:timbrar": "tsx --env-file=.env src/humo-timbrar.ts",
     "humo:descuento": "tsx --env-file=.env src/humo-descuento.ts",
     "humo:pos": "tsx --env-file=.env src/humo-pos.ts",

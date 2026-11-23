@@ -21,6 +21,7 @@
  */
 
 import { spawn } from "node:child_process";
+import { realpathSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import net from "node:net";
 import { tmpdir } from "node:os";
@@ -38,7 +39,10 @@ import { migrar } from "./migrar.js";
 const PUERTO = Number(process.env.HUMO_PUERTO ?? 3000);
 const NOMBRE_BASE = "pos_humo_pos";
 const CARPETA_MIGRACIONES = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "migraciones");
-const POS_DIR = process.env.POS_DIR ?? path.resolve("..", "OneDrive", "Documentos", "pos-ferreteria");
+// Ruta canónica: en Windows, vitest carga DOS copias de sí mismo si la carpeta llega con la
+// letra de unidad en minúscula (c:...) y falla con "reading 'config'". realpath la
+// devuelve con la forma real del sistema (C:...).
+const POS_DIR = realpathSync.native(process.env.POS_DIR ?? path.resolve("..", "OneDrive", "Documentos", "pos-ferreteria"));
 
 const config = leerConfig();
 const email = process.env.TERMINAL_EMAIL ?? "";

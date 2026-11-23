@@ -522,7 +522,7 @@ describe("seguridad: lista blanca", () => {
     const escribibles = Object.entries(TABLAS).filter(([, t]) => t.escribible).map(([n]) => n).sort();
     expect(escribibles).toEqual(
       [
-        "clientes", "cotizacion_detalles", "cotizaciones", "facturas_globales", "producto_codigos",
+        "abonos", "clientes", "cotizacion_detalles", "cotizaciones", "cuentas_por_cobrar", "facturas_globales", "producto_codigos",
         "producto_precios", "productos", "turnos", "usuarios", "venta_detalles", "venta_pagos", "ventas",
       ].sort(),
     );
