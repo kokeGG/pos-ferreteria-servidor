@@ -10,12 +10,18 @@
  */
 
 const base = (process.env.SUPABASE_URL ?? "").replace(/\/+$/, "");
-const secreta = process.env.SUPABASE_SECRET_KEY ?? "";
+// Se acepta SB_SECRET_KEY (el nombre del secreto de la función) o SUPABASE_SECRET_KEY.
+const secreta = process.env.SB_SECRET_KEY || process.env.SUPABASE_SECRET_KEY || "";
 const publica = process.env.SUPABASE_PUBLISHABLE_KEY ?? "";
 const email = process.env.TERMINAL_EMAIL ?? "";
 const password = process.env.TERMINAL_PASSWORD ?? "";
 if (![base, secreta, publica, email, password].every(Boolean)) {
-  console.error("Faltan SUPABASE_URL, SUPABASE_SECRET_KEY, SUPABASE_PUBLISHABLE_KEY, TERMINAL_EMAIL o TERMINAL_PASSWORD en .env.");
+  console.error("Faltan SUPABASE_URL, SB_SECRET_KEY (o SUPABASE_SECRET_KEY), SUPABASE_PUBLISHABLE_KEY, TERMINAL_EMAIL o TERMINAL_PASSWORD en .env.");
+  process.exit(1);
+}
+// Un error común: pegar la llave PÚBLICA donde va la secreta. Se dice claro, sin llamar a la API.
+if (secreta.startsWith("sb_publishable_") || secreta === publica) {
+  console.error("La llave de SB_SECRET_KEY es la PÚBLICA (empieza con sb_publishable_). Hace falta la secreta: la que empieza con sb_secret_ (Supabase → Project Settings → API Keys → Secret keys).");
   process.exit(1);
 }
 if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(base)) {
